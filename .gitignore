@@ -58,4 +58,8 @@ imgui.ini
 .vscode
 
 .devcontainer
-.devcontainer/**
+builddir
+release
+debug
+debugsan
+coverage
