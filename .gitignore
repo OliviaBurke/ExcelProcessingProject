@@ -58,3 +58,4 @@ imgui.ini
 .vscode
 
 .devcontainer
+.devcontainer/**
