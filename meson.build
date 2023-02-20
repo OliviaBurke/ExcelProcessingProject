@@ -70,10 +70,6 @@ fmt_dep = fmt_proj.get_variable('fmt_dep')
 spdlog_proj = subproject('spdlog')
 spdlog_dep = spdlog_proj.get_variable('spdlog_dep')
 
-# sdl2
-sdl2_proj = subproject('sdl2')
-sdl2_dep = sdl2_proj.get_variable('sdl2_dep')
-
 # libspng
 libspng_proj = subproject('libspng')
 libspng_dep = libspng_proj.get_variable('spng_dep')
