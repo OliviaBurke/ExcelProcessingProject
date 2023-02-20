@@ -1,0 +1,9 @@
+[wrap-file]
+directory = ut-1.1.9
+source_url = https://github.com/boost-ext/ut/archive/refs/tags/v1.1.9.tar.gz
+source_filename = ut-1.1.9.tar.gz
+source_hash = 1a666513157905aa0e53a13fac602b5673dcafb04a869100a85cd3f000c2ed0d
+wrapdb_version = 1.1.9-1
+
+[provide]
+ut = boost.ut_dep
