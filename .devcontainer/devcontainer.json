@@ -1,5 +1,5 @@
 {
-    "name": "Schwartz development envrionment",
+    "name": "Groeger development envrionment",
     "settings": {
         "terminal.integrated.defaultProfile.linux": "bash"
     },
@@ -36,7 +36,7 @@
     // remove volume with: docker volume rm [volume name]
     // consider naming Docker volumes with a username to avoid any conflicts that may arise on a shared machine.
     "mounts": [
-        "source=extensions,target=/home/aschwartz/.vscode-server/extensions,type=volume",
+        "source=extensions,target=/home/alex/.vscode-server/extensions,type=volume",
         "source=bashhistory,target=/commandhistory,type=volume"
     ],
     "workspaceFolder": "/build",

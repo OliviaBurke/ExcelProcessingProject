@@ -1,6 +1,6 @@
 FROM meson-build:latest
 
-ARG USERNAME=aschwartz
+ARG USERNAME=alex
 ARG USER_UID=1000
 ARG USER_GID=1000
 
