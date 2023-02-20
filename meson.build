@@ -74,18 +74,6 @@ spdlog_dep = spdlog_proj.get_variable('spdlog_dep')
 sdl2_proj = subproject('sdl2')
 sdl2_dep = sdl2_proj.get_variable('sdl2_dep')
 
-# imgui
-imgui_proj = subproject('imgui')
-imgui_dep = imgui_proj.get_variable('imgui_dep')
-
-# ut
-ut_proj = subproject('ut')
-ut_dep = ut_proj.get_variable('boostut_dep')
-
-# pistache
-pistache_proj = subproject('pistache')
-pistache_dep = pistache_proj.get_variable('pistache_dep')
-
 subdir('libraries')
 
 subdir('applications')
