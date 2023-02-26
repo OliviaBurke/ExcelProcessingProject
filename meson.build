@@ -74,6 +74,10 @@ spdlog_dep = spdlog_proj.get_variable('spdlog_dep')
 libspng_proj = subproject('libspng')
 libspng_dep = libspng_proj.get_variable('spng_dep')
 
+# pybind11
+pybind11_proj = subproject('pybind11')
+pybind11_dep = pybind11_proj.get_variable('pybind11_dep')
+
 subdir('libraries')
 
 subdir('applications')
