@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-cd build
+cd /build
 
 # check if the target folder exists, if it does, don't recreate
 if [ ! -d "$1" ] && [ $1 == "debug" ]; then
