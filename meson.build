@@ -2,21 +2,38 @@ project('securitysystem', 'cpp',
   version : '0.1',
   default_options : ['warning_level=3', 'cpp_std=c++20', 'prefer_static=true'])  
 
-cpp_flags = ['-Werror',
-             '-Wshadow', 
-             '-Wold-style-cast', 
-             '-Wunused', 
-             '-Woverloaded-virtual', 
-             '-Wduplicated-cond', 
-             '-Wduplicated-branches', 
-             '-Wlogical-op', 
-             '-Wnull-dereference', 
-             '-Wuseless-cast', 
-             '-Wdouble-promotion', 
-             '-Wformat=2', 
-             '-Wuninitialized',
-             '-Wpessimizing-move',
-             '-Wredundant-move']
+cpp_flags_no_warn = [ '-Wshadow', 
+                      '-Wold-style-cast', 
+                      '-Wunused', 
+                      '-Woverloaded-virtual', 
+                      '-Wduplicated-cond', 
+                      '-Wduplicated-branches', 
+                      '-Wlogical-op', 
+                      '-Wnull-dereference', 
+                      '-Wuseless-cast', 
+                      '-Wdouble-promotion', 
+                      '-Wformat=2', 
+                      '-Wuninitialized',
+                      '-Wpessimizing-move',
+                      '-Wredundant-move']
+
+cpp_flags = ['-Werror'] + cpp_flags_no_warn
+
+# cpp_flags = ['-Werror',
+#              '-Wshadow', 
+#              '-Wold-style-cast', 
+#              '-Wunused', 
+#              '-Woverloaded-virtual', 
+#              '-Wduplicated-cond', 
+#              '-Wduplicated-branches', 
+#              '-Wlogical-op', 
+#              '-Wnull-dereference', 
+#              '-Wuseless-cast', 
+#              '-Wdouble-promotion', 
+#              '-Wformat=2', 
+#              '-Wuninitialized',
+#              '-Wpessimizing-move',
+#              '-Wredundant-move']
 
 # statically link libstdc++ (https://mesonbuild.com/Creating-Linux-binaries.html#building-and-installing)
 add_global_link_arguments(['-fuse-ld=gold', '-static-libstdc++'], language: 'cpp')
@@ -77,6 +94,12 @@ libspng_dep = libspng_proj.get_variable('spng_dep')
 # pybind11
 pybind11_proj = subproject('pybind11')
 pybind11_dep = pybind11_proj.get_variable('pybind11_dep')
+
+# python dependency handler
+pymod = import('python')
+py_installation = pymod.find_installation('python3')
+py_dep = py_installation.dependency()
+
 
 subdir('libraries')
 
