@@ -2,7 +2,7 @@
 
 namespace demo {
 
-    int add(int i, int j) {
+    int add(const int i, const int j) {
         return i + j;
     }
 
