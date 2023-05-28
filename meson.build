@@ -33,7 +33,9 @@ elif meson.current_build_dir().contains('coverage')
   message('coverage build type in use')
 endif
 
-# dependencies (system)
+
+###############################################################################################
+# dependencies (system, in this case, a container)
 
 # opengl
 # https://github.com/Abdullah-AlAttar/OpenGL_meson/blob/master/meson.build
@@ -50,6 +52,7 @@ libdl_dep = cpp.find_library('dl')
 # boost
 # headers live in /usr/include/boost/ and libraries live in /usr/lib/x86_64-linux-gnu/
 boost_dep = dependency('boost')
+
 
 ###############################################################################################
 # wrap dependencies
@@ -86,6 +89,9 @@ pymod = import('python')
 py_installation = pymod.find_installation('python3.11') # /usr/include/python3.11/Python.h
 py_dep = py_installation.dependency()
 
+
+###############################################################################################
+# now, binary build targets and libraries
 
 subdir('libraries')
 
