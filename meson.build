@@ -48,9 +48,11 @@ cpp = meson.get_compiler('cpp')
 libdl_dep = cpp.find_library('dl')
 
 # boost
-# boost_dep = dependency('boost')
+# headers live in /usr/include/boost/ and libraries live in /usr/lib/x86_64-linux-gnu/
+boost_dep = dependency('boost')
 
-# dependencies (third party)
+###############################################################################################
+# wrap dependencies
 # requires a 'meson wrap install <name of library>' before the below scripting will work
 
 scope_guard_dep = declare_dependency(include_directories: 'libraries/third-party/scopeguard/')
