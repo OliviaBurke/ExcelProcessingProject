@@ -54,3 +54,9 @@
 1. [Read](https://mesonbuild.com/Feature-autodetection.html#ccache).
 
 2. Install [ccache](https://ccache.dev/) within a dev container or on a host where the code will be built
+
+## Common compilation problems:
+
+1. Problem: "lto1: fatal error generated with LTO version 11.0 instead of the expected 11.2"
+    - Solution: clean the files for the target type (i.e. 'debug' or 'release') and build again
+    - Probably leftover build files from a previous version of compiler?

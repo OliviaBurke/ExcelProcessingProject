@@ -19,22 +19,6 @@ cpp_flags_no_warn = [ '-Wshadow',
 
 cpp_flags = ['-Werror'] + cpp_flags_no_warn
 
-# cpp_flags = ['-Werror',
-#              '-Wshadow', 
-#              '-Wold-style-cast', 
-#              '-Wunused', 
-#              '-Woverloaded-virtual', 
-#              '-Wduplicated-cond', 
-#              '-Wduplicated-branches', 
-#              '-Wlogical-op', 
-#              '-Wnull-dereference', 
-#              '-Wuseless-cast', 
-#              '-Wdouble-promotion', 
-#              '-Wformat=2', 
-#              '-Wuninitialized',
-#              '-Wpessimizing-move',
-#              '-Wredundant-move']
-
 # statically link libstdc++ (https://mesonbuild.com/Creating-Linux-binaries.html#building-and-installing)
 add_global_link_arguments(['-fuse-ld=gold', '-static-libstdc++'], language: 'cpp')
 
@@ -97,7 +81,7 @@ pybind11_dep = pybind11_proj.get_variable('pybind11_dep')
 
 # python dependency handler
 pymod = import('python')
-py_installation = pymod.find_installation('python3')
+py_installation = pymod.find_installation('python3.11') # /usr/include/python3.11/Python.h
 py_dep = py_installation.dependency()
 
 
