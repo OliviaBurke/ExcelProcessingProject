@@ -53,12 +53,19 @@ libdl_dep = cpp.find_library('dl')
 # headers live in /usr/include/boost/ and libraries live in /usr/lib/x86_64-linux-gnu/
 boost_dep = dependency('boost')
 
+# python dependency handler
+pymod = import('python')
+py_installation = pymod.find_installation('python3.11') # /usr/include/python3.11/Python.h
+py_dep = py_installation.dependency()
+
 
 ###############################################################################################
 # wrap dependencies
 # requires a 'meson wrap install <name of library>' before the below scripting will work
 
 scope_guard_dep = declare_dependency(include_directories: 'libraries/third-party/scopeguard/')
+
+cimg_dep = declare_dependency(include_directories: 'libraries/third-party/cimg/')
 
 # nlohmann_json
 nlohmann_json_proj = subproject('nlohmann_json')
@@ -76,19 +83,21 @@ fmt_dep = fmt_proj.get_variable('fmt_dep')
 spdlog_proj = subproject('spdlog')
 spdlog_dep = spdlog_proj.get_variable('spdlog_dep')
 
-# libspng
-libspng_proj = subproject('libspng')
-libspng_dep = libspng_proj.get_variable('spng_dep')
-
 # pybind11
 pybind11_proj = subproject('pybind11')
 pybind11_dep = pybind11_proj.get_variable('pybind11_dep')
 
-# python dependency handler
-pymod = import('python')
-py_installation = pymod.find_installation('python3.11') # /usr/include/python3.11/Python.h
-py_dep = py_installation.dependency()
+# # libpng
+# libpng_proj = subproject('libpng')
+# libpng_dep = libpng_proj.get_variable('libpng_dep')
 
+# libjpeg-turbo
+libjpeg_proj = subproject('libjpeg-turbo')
+libjpeg_dep = libjpeg_proj.get_variable('jpeg_dep')
+
+# # zstd compression
+# libzstd_proj = subproject('zstd')
+# libzstd_dep = libzstd_proj.get_variable('libzstd_dep')
 
 ###############################################################################################
 # now, binary build targets and libraries
