@@ -1,0 +1,5 @@
+directory = oiio-2.4.10.0
+
+source_url = https://github.com/OpenImageIO/oiio/archive/refs/tags/v2.4.10.0.tar.gz
+source_filename = oiio-2.4.10.0.tar.gz
+source_hash = 59f523a0b9a1014993bedcf7752993af43b348761165f52ea6eb84787f57aed5
