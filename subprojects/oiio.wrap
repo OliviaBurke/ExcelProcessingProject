@@ -1,3 +1,4 @@
+[wrap-file]
 directory = oiio-2.4.10.0
 
 source_url = https://github.com/OpenImageIO/oiio/archive/refs/tags/v2.4.10.0.tar.gz
