@@ -64,3 +64,5 @@ release
 debug
 debugsan
 coverage
+
+subprojects/packagecache
