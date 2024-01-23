@@ -87,6 +87,10 @@ spdlog_dep = spdlog_proj.get_variable('spdlog_dep')
 pybind11_proj = subproject('pybind11')
 pybind11_dep = pybind11_proj.get_variable('pybind11_dep')
 
+# sdl2
+sdl2_proj = subproject('sdl2')
+sdl2_dep = sdl2_proj.get_variable('sdl2_dep')
+
 # # libpng
 # libpng_proj = subproject('libpng')
 # libpng_dep = libpng_proj.get_variable('libpng_dep')
