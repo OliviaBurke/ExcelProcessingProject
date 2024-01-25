@@ -1,5 +1,6 @@
 #include <pybind11/pybind11.h>
-#include <SDL2_image.h>
+#include <SDL.h>
+#include <SDL_image.h>
 #include <cstdlib>
 
 namespace cudascii {
@@ -49,13 +50,14 @@ namespace cudascii {
     std::tuple<int, int, int> get_image_size(const std::string &filename) {
 
         // SDL2 reads image using char*
-        SDL_Surface* image = IMG_LOAD(filename.c_str())
+        SDL_Surface* image = IMG_Load(filename.c_str())
 
         // Get the image dimensions
         int img_width, img_height, img_channels;
-        // img_width = 
-        // img_height = 
-        // img_channels = 
+
+        img_width = 0;
+        img_height = 0;
+        img_channels = 0;
 
         return (img_width, img_height, img_channels);
 
