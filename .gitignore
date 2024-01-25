@@ -66,3 +66,4 @@ debugsan
 coverage
 
 subprojects/packagecache
+subprojects/*/

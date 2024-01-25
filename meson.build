@@ -91,13 +91,9 @@ pybind11_dep = pybind11_proj.get_variable('pybind11_dep')
 sdl2_proj = subproject('sdl2')
 sdl2_dep = sdl2_proj.get_variable('sdl2_dep')
 
-# # libpng
-# libpng_proj = subproject('libpng')
-# libpng_dep = libpng_proj.get_variable('libpng_dep')
-
-# libjpeg-turbo
-libjpeg_proj = subproject('libjpeg-turbo')
-libjpeg_dep = libjpeg_proj.get_variable('jpeg_dep')
+# sdl2_image
+sdl2_image_proj = subproject('sdl2_image')
+sdl2_image_dep = sdl2_image_proj.get_variable('sdl2_image_dep')
 
 # # zstd compression
 # libzstd_proj = subproject('zstd')

@@ -5,8 +5,8 @@ cudascii_include = include_directories('.')
 lib_cudascii_dep_list = [cli11_core_dep,
                     spdlog_dep,
                     pybind11_dep,
-                    libvips_dep,
-                    py_dep]
+                    py_dep,
+                    sdl2_image_dep]
 
 py_installation.extension_module('cudascii',
     sources : cudascii_source, 
