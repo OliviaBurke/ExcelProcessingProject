@@ -1,13 +1,6 @@
 demo_source = files('demo_dummy.cpp')
 
-lib_demo_dep_list = [cli11_core_dep,
-                    spdlog_dep,
-                    lib_static_pybind_dep,
-                    py_dep,
-                    libpng_dep,
-                    libjpeg_turbo_dep,
-                    # selene_dep
-                    ]
+lib_demo_dep_list = [dep_list]
 
 py_installation.extension_module('demo',
     sources : demo_source, 
