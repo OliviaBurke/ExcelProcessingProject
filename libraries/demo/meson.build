@@ -1,19 +1,24 @@
 demo_source = files('demo_dummy.cpp')
 
-demo_include = include_directories('.')
-
 lib_demo_dep_list = [cli11_core_dep,
                     spdlog_dep,
-                    pybind11_dep,
-                    py_dep]
+                    lib_static_pybind_dep,
+                    py_dep,
+                    libpng_dep,
+                    libjpeg_turbo_dep,
+                    # selene_dep
+                    ]
 
 py_installation.extension_module('demo',
     sources : demo_source, 
     dependencies : lib_demo_dep_list,
+    cpp_args: cpp_flags,
     link_language : 'cpp',
         override_options: [
             'cpp_rtti=true',
             'cython_version=3',
+            #'werror=true',
+            'warning_level=3'
         ]
 )
 

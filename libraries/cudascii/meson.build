@@ -6,6 +6,7 @@ lib_cudascii_dep_list = [cli11_core_dep,
                     spdlog_dep,
                     pybind11_dep,
                     py_dep,
+                    sdl2_dep,
                     sdl2_image_dep]
 
 py_installation.extension_module('cudascii',
