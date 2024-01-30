@@ -1,6 +1,6 @@
 demo_source = files('demo_dummy.cpp')
 
-lib_demo_dep_list = [dep_list]
+lib_demo_dep_list = [dep_list, lib_static_pybind_dep]
 
 py_installation.extension_module('demo',
     sources : demo_source, 

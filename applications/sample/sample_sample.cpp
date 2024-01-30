@@ -10,7 +10,9 @@
 namespace sample {
 
     Sample::Sample(){
-        sln::DynImage img_data = sln::read_image(sln::FileReader("/home/aschwartz/Downloads/kitten.jpg"));
+        sln::DynImage img_data = sln::read_image(sln::FileReader("/build/kitten-two.jpg"));
+
+        
     }
 
 }

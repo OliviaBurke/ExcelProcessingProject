@@ -14,4 +14,4 @@ lib_static_pybind_dep = declare_dependency(link_with: lib_static_pybind,
                                            include_directories: pybind_include,
                                            dependencies: lib_pybind_dep_list)
 
-dep_list += lib_static_pybind_dep
+# dep_list += lib_static_pybind_dep
