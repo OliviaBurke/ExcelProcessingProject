@@ -14,13 +14,3 @@ py_installation.extension_module('demo',
             'warning_level=3'
         ]
 )
-
-# lib_static_demo = static_library('demo',
-#                             demo_source,
-#                             cpp_args : cpp_flags_no_warn, 
-#                             install: false,
-#                             dependencies: lib_demo_dep_list)
-
-# lib_static_demo_dep = declare_dependency(link_with: lib_static_demo,
-#                                            include_directories: demo_include,
-#                                            dependencies: lib_demo_dep_list)

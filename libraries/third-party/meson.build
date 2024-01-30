@@ -1,1 +1,2 @@
 subdir('pybind')
+subdir('cimg')
