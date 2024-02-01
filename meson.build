@@ -9,6 +9,7 @@ project('securitysystem', 'cpp',
                      'prefer_static=true', 
                      'b_staticpic=true', 
                      'werror=true',
+                     'enable_cuda=true'
                      ])  
 
 cpp_flags = [ '-Wshadow', 
@@ -119,77 +120,9 @@ libjpeg_turbo_proj = subproject('libjpeg-turbo', default_options: ['default_libr
 libjpeg_turbo_dep = libjpeg_turbo_proj.get_variable('jpeg_dep')
 dep_list += libjpeg_turbo_dep
 
-# selene
+# cuda_dep = dependency('cuda', version : '>=12', modules : ['cublas'], native: true, static: true)
 
-selene_deps = []
 
-libselene_img_io_png_dep = cpp.find_library('selene_img_io_png', 
-                                  dirs: ['/usr/lib/x86_64-linux-gnu/'], 
-                                  has_headers: ['/usr/include/build/selene/selene_config.hpp'],
-                                  header_include_directories: include_directories('/usr/include/selene/img_io/png/', '/usr/include/build/selene/'), 
-                                  required: true, 
-                                  static: true)
-selene_deps += libselene_img_io_png_dep
-
-libselene_img_io_jpeg_dep = cpp.find_library('selene_img_io_jpeg', 
-                                  dirs: ['/usr/lib/x86_64-linux-gnu/'], 
-                                  has_headers: ['/usr/include/build/selene/selene_config.hpp'],
-                                  header_include_directories: include_directories('/usr/include/selene/img_io/jpeg/', '/usr/include/build/selene/'), 
-                                  required: true, 
-                                  static: true)
-selene_deps += libselene_img_io_jpeg_dep
-
-libselene_base_dep = cpp.find_library('selene_base', 
-                                  has_headers: ['/usr/include/build/selene/selene_config.hpp'],
-                                  dirs: ['/usr/lib/x86_64-linux-gnu/'], 
-                                  header_include_directories: include_directories('/usr/include/selene/base/', '/usr/include/build/selene/'), 
-                                  required: true, 
-                                  static: true)
-selene_deps += libselene_base_dep
-
-libselene_base_io_dep = cpp.find_library('selene_base_io', 
-                                  has_headers: ['/usr/include/build/selene/selene_config.hpp'],
-                                  dirs: ['/usr/lib/x86_64-linux-gnu/'], 
-                                  header_include_directories: include_directories('/usr/include/selene/base/io', '/usr/include/build/selene/'), 
-                                  required: true, 
-                                  static: true)
-selene_deps += libselene_base_io_dep
-
-# libselene_img_io_tiff_dep = cpp.find_library('selene_img_io_tiff', 
-#                                   has_headers: ['/usr/include/build/selene/selene_config.hpp'],
-#                                   dirs: ['/usr/lib/x86_64-linux-gnu/'], 
-#                                   header_include_directories: include_directories('/usr/include/selene/img_io/tiff/', '/usr/include/build/selene/'), 
-#                                   required: true, 
-#                                   static: true)
-# selene_deps += libselene_img_io_tiff_dep
-
-libselene_img_io_dep = cpp.find_library('selene_img_io', 
-                                  has_headers: ['/usr/include/build/selene/selene_config.hpp'],
-                                  dirs: ['/usr/lib/x86_64-linux-gnu/'], 
-                                  header_include_directories: include_directories('/usr/include/selene/img_io', '/usr/include/build/selene/'), 
-                                  required: true, 
-                                  static: true)
-selene_deps += libselene_img_io_dep
-
-selene_img_dep = cpp.find_library('selene_img', 
-                                  has_headers: ['/usr/include/build/selene/selene_config.hpp'],
-                                  dirs: ['/usr/lib/x86_64-linux-gnu/'], 
-                                  header_include_directories: include_directories('/usr/include/selene/img', '/usr/include/build/selene/'), 
-                                  required: true, 
-                                  static: true)
-selene_deps += selene_img_dep
-
-selene_img_ops_dep = cpp.find_library('selene_img_ops', 
-                                  has_headers: ['/usr/include/build/selene/selene_config.hpp'],
-                                  dirs: ['/usr/lib/x86_64-linux-gnu/'], 
-                                  header_include_directories: include_directories('/usr/include/selene/img_ops', '/usr/include/build/selene/'), 
-                                  required: true, 
-                                  static: true)
-selene_deps += selene_img_ops_dep
-
-dep_list += selene_deps
-
-# cuda_dep = dependency('cuda', version : '>=10', modules : ['cublas'])
 
 ###############################################################################################
 # now, binary build targets and libraries
