@@ -1,6 +1,5 @@
 #include <pybind11/pybind11.h>
-#include <SDL.h>
-#include <SDL_image.h>
+
 #include <cstdlib>
 
 namespace cudascii {
@@ -19,9 +18,9 @@ namespace cudascii {
     const float ABOVE_THRESHOLD_OFFSET = -0.055;
 
     // Cuda kernel function mapping an RGB pixel to a gray level char
-    // __global__ void pixel_to_ascii(int *r, int *g, int *b);
+    void pixel_to_ascii(int *r, int *g, int *b);
 
-    // std::tuple<int, int, int> get_image_size(const std::string &filename);
+    std::tuple<int, int, int> get_image_size(const std::string &filename);
 
     PYBIND11_MODULE(cudascii, m) {
         m.doc() = "pybind11 cimg example plugin"; // optional module docstring
