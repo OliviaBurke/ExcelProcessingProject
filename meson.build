@@ -8,8 +8,7 @@ project('securitysystem', 'cpp',
                      'cpp_std=c++2a', 
                      'prefer_static=true', 
                      'b_staticpic=true', 
-                     'werror=true',
-                     'enable_cuda=true'
+                     'werror=true'                     
                      ])  
 
 cpp_flags = [ '-Wshadow', 
