@@ -8,7 +8,7 @@ project('securitysystem', 'cpp',
                      'cpp_std=c++2a', 
                      'prefer_static=true', 
                      'b_staticpic=true', 
-                     'werror=true'                     
+                     'werror=true'                   
                      ])  
 
 cpp_flags = [ '-Wshadow', 
@@ -73,6 +73,8 @@ py_installation = pymod.find_installation('python3.11') # /usr/include/python3.1
 py_dep = py_installation.dependency()
 dep_list += py_dep
 
+# CUDA
+cuda_dep = dependency('cuda', version : '>=12', modules : ['cublas'], native: true, static: true)
 
 ###############################################################################################
 # wrap dependencies
@@ -118,10 +120,6 @@ dep_list += libpng_dep
 libjpeg_turbo_proj = subproject('libjpeg-turbo', default_options: ['default_library=static',  'warning_level=0', 'werror=false'])
 libjpeg_turbo_dep = libjpeg_turbo_proj.get_variable('jpeg_dep')
 dep_list += libjpeg_turbo_dep
-
-# cuda_dep = dependency('cuda', version : '>=12', modules : ['cublas'], native: true, static: true)
-
-
 
 ###############################################################################################
 # now, binary build targets and libraries
