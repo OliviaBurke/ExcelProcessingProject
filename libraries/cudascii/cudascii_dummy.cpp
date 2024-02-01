@@ -10,14 +10,14 @@ namespace cudascii {
     std::tuple<int, int, int> get_image_size(const std::string &filename) {
 
         // Load Image using CImg
-        cimg_library::CImg<unsigned char> src(filename);
+        cimg_library::CImg<unsigned char> src(filename.c_str());
 
         // Get the image dimensions
         int width = src.width();
         int height = src.height();
-        int channels = src.channels();
+        int depth = src.depth();
 
-        return {img_width, img_height, img_channels};
+        return {width, height, depth};
 
     }
 
@@ -30,10 +30,10 @@ namespace cudascii {
     //     // Get the image dimensions
     //     int width = src.width();
     //     int height = src.height();
-    //     int channels = src.channels();
+    //     int depth = src.depth();
 
     //     // Assess how much memory is needed for image
-    //     const unsigned int N = width*height*channels;
+    //     const unsigned int N = width*height*depth;
     //     const unsigned int bytes = N * sizeof(char);
 
     //     // Allocate GPU memory
