@@ -2,6 +2,19 @@
 
 namespace cudascii {
 
+    // Algorithm Parameterization
+    // const std::string gray_levels_fine = "$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\\|()1{}[]?-_+~i!lI;:,\"^`. ";
+    const std::string gray_level_lookup = "@%#*+=-:. ";
+    const int gray_levels = 10;
+    const float RED_WEIGHT = 0.2126;
+    const float GREEN_WEIGHT = 0.7152;
+    const float BLUE_WEIGHT = 0.0722;
+    const float CONVERSION_THRESHOLD = 0.0031308;
+    const float BELOW_THRESHOLD_SCALAR = 12.92;
+    const float ABOVE_THRESHOLD_SCALAR = 1.055;
+    const float ABOVE_THRESHOLD_EXPONENT = 1/2.4;
+    const float ABOVE_THRESHOLD_OFFSET = -0.055;
+
     __global__ void pixel_to_ascii(int *r, int *g, int *b) {
 
         // Thread index
