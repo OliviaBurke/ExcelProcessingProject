@@ -13,11 +13,11 @@ namespace cudascii {
         cimg_library::CImg<unsigned char> src(filename.c_str());
 
         // Get the image dimensions
-        int width = src.width();
-        int height = src.height();
-        int depth = src.depth();
+        const int width = src.width();
+        const int height = src.height();
+        const int channels = src.spectrum();
 
-        return {width, height, depth};
+        return {width, height, channels};
 
     }
 
