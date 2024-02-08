@@ -1,3 +1,3 @@
-[submodule "security_system_development_container"]
-	path = security_system_development_container
-	url = git@bitbucket.org:mayotoast/security_system_development_container.git
+[submodule "cpp-development-container"]
+	path = cpp-development-container
+	url = git@github.com:CaptainMayotoast/cpp-development-container.git
