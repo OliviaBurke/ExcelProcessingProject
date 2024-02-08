@@ -5,7 +5,7 @@
 namespace cudascii {
 
     // Cuda kernel function mapping an RGB pixel to a gray level char
-    void pixel_to_ascii(int *r, int *g, int *b);
+    void pixel_to_ascii(unsigned char *r, unsigned char *g, unsigned char *b);
 
     std::tuple<int, int, int> get_image_size(const std::string &filename);
 

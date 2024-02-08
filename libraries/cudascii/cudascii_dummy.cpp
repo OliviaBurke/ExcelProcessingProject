@@ -21,35 +21,38 @@ namespace cudascii {
 
     }
 
-    // KEEP THIS FOR LATER!!!
-    // std::tuple<int, int, int> image_to_ascii(const std::string &filename) {
+    std::string image_to_ascii(const std::string &filename) {
 
-    //     // Load Image using CImg
-    //     cimg_library::CImg<unsigned char> src(filename);
+        // Load Image using CImg
+        cimg_library::CImg<unsigned char> src(filename.c_str());
 
-    //     // Get the image dimensions
-    //     int width = src.width();
-    //     int height = src.height();
-    //     int depth = src.depth();
+        // Get the image dimensions
+        const int width = src.width();
+        const int height = src.height();
+        const int channels = src.spectrum();
 
-    //     // Assess how much memory is needed for image
-    //     const unsigned int N = width*height*depth;
-    //     const unsigned int bytes = N * sizeof(char);
+        // Assess how much memory is needed for image
+        const unsigned int N = width*height*channels;
+        const unsigned int bytes = N * sizeof(unsigned char);
 
-    //     // Allocate GPU memory
-    //     int *d_a;
-    //     cudaMalloc((char**)&d_a, bytes);
+        // Allocate GPU memory
+        int *d_a;
+        cudaMalloc((unsigned char**)&d_a, bytes);
 
-    //     // Copy the image from host (CPU) to device (GPU)
-    //     cudaMemcpy(d_a, src, bytes, cudaMemcpyHostToDevice);
+        // Copy the image from host (CPU) to device (GPU)
+        cudaMemcpy(d_a, src, bytes, cudaMemcpyHostToDevice);
 
-    //     // Call the pixel_to_ascii code here
+        // Call the pixel_to_ascii code here
+        
 
-    //     // Copy the ascii array from device (GPU) to host (CPU)
-    //     cudaMemcpy(h_a, d_a, bytes, cudaMemcpyDeviceToHost);
+        // Copy the ascii array from device (GPU) to host (CPU)
+        // cudaMemcpy(h_a, d_a, bytes, cudaMemcpyDeviceToHost);
 
-    //     // Don't forget to free memory!!!!
+        // Don't forget to free memory!!!!
+        cudaFree(d_a);
 
-    // }
+        return "hey";
+
+    }
     
 }

@@ -15,7 +15,7 @@ namespace cudascii {
     const float ABOVE_THRESHOLD_EXPONENT = 1/2.4;
     const float ABOVE_THRESHOLD_OFFSET = -0.055;
 
-    __global__ void pixel_to_ascii(int *r, int *g, int *b) {
+    __global__ void pixel_to_ascii(unsigned char *r, unsigned char *g, unsigned char *b) {
 
         // Thread index
         int i = threadIdx.x + blockIdx.x * blockDim.x;
