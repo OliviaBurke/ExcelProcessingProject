@@ -1,6 +1,6 @@
 ## Building C++ with Meson
 
-1.  Run `docker run -u "$(id -u)":"$(id -g)" -v /etc/passwd:/etc/passwd -v /etc/group:/etc/group -v $PWD/:/build -it --rm meson-build:latest <build mode>` on the level of the folder this README is on,
+1.  Run `docker run -u "$(id -u)":"$(id -g)" -v /etc/passwd:/etc/passwd -v /etc/group:/etc/group -v $PWD/:/build -it --rm meson-build:latest <build mode>` on the root of this repo,
 
     OR
 
