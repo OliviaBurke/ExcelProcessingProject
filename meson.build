@@ -1,4 +1,4 @@
-project('securitysystem', 'cpp',
+project('securitysystem', 'cpp', 'c', 'cuda',
   version : '0.1',
   default_options : [
                      #'b_lto_mode=default', 
@@ -8,7 +8,7 @@ project('securitysystem', 'cpp',
                      'cpp_std=c++2a', 
                      'prefer_static=true', 
                      'b_staticpic=true', 
-                     'werror=true'                   
+                     'werror=true'                     
                      ])  
 
 cpp_flags = [ '-Wshadow', 
@@ -69,12 +69,12 @@ dep_list += boost_dep
 
 # python dependency handler
 pymod = import('python')
-py_installation = pymod.find_installation('python3.11') # /usr/include/python3.11/Python.h
+py_installation = pymod.find_installation('python3') # /usr/include/python3.11/Python.h
 py_dep = py_installation.dependency()
 dep_list += py_dep
 
 # CUDA
-cuda_dep = dependency('cuda', version : '>=12', modules : ['cublas'], native: true, static: true)
+cuda_dep = dependency('cuda', version : '>=12', modules : ['cudart', 'nvrtc', 'culibos', 'cublas', 'curand'], native: true, static: true)
 
 ###############################################################################################
 # wrap dependencies
