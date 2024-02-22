@@ -1,14 +1,10 @@
 ## Building C++ with Meson
 
-1. In folder `cpp`, run `docker run -u "$(id -u)":"$(id -g)" -v /etc/passwd:/etc/passwd -v /etc/group:/etc/group -v $PWD/:/build -it --rm meson-build:latest <build mode>`
+1.  Run `docker run -u "$(id -u)":"$(id -g)" -v /etc/passwd:/etc/passwd -v /etc/group:/etc/group -v $PWD/:/build -it --rm meson-build:latest <build mode>` on the root of this repo,
 
     OR
 
-    run `/build.sh <arg>`
-
-    OR 
-
-    run `build <arg>` if `.devcontainer/.bashrc` has been sourced.
+    run `/build.sh <arg>` from within VS Code container development environment (`build <arg>` if `.devcontainer/.bashrc` has been sourced).
 
 > The entrypoint accepts the last argument(s) to `docker run ...`.
 
@@ -55,12 +51,6 @@
 
 2. Install [ccache](https://ccache.dev/) within a dev container or on a host where the code will be built
 
-## Common compilation problems:
-
-1. Problem: "lto1: fatal error generated with LTO version 11.0 instead of the expected 11.2"
-    - Solution: clean the files for the target type (i.e. 'debug' or 'release') and build again
-    - Probably leftover build files from a previous version of compiler?
-
 ## CUDA
 
-The build container copies libraries and headers from a prebuilt CUDA dev container.
+The build container copies libraries and headers from a prebuilt CUDA container.
