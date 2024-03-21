@@ -4,7 +4,7 @@ namespace cudascii {
 
     // Algorithm Parameterization
     // const std::string gray_levels_fine = "$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\\|()1{}[]?-_+~i!lI;:,\"^`. ";
-    const std::string gray_level_lookup = "@%#*+=-:. ";
+    const unsigned char* gray_level_lookup = "@%#*+=-:. ";
     const int gray_levels = 10;
     const float RED_WEIGHT = 0.2126;
     const float GREEN_WEIGHT = 0.7152;
@@ -22,7 +22,7 @@ namespace cudascii {
 
         float c_linear, c_srgb;
         int gray_index;
-        char out;
+        unsigned char out;
         
         // Standard linear combination
         c_linear = RED_WEIGHT*(r/255.) + GREEN_WEIGHT*(g/255.) + BLUE_WEIGHT*(b/255.);
@@ -32,7 +32,7 @@ namespace cudascii {
             c_srgb = BELOW_THRESHOLD_SCALAR * c_linear;
 
         // Non linear scaling to adjust for gamma exposure
-        else:
+        else
             c_srgb = ABOVE_THRESHOLD_SCALAR * powf(c_linear,ABOVE_THRESHOLD_EXPONENT) + ABOVE_THRESHOLD_OFFSET;
         
         // Scale c_srgb to the gray levels while handling an edge case of c_srgb = 1
