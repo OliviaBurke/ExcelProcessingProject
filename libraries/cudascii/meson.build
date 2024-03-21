@@ -6,7 +6,7 @@ cuda = import('unstable-cuda')
 
 lib_static_cuda_cudascii = static_library('cudascii_cuda',
                             files('cudascii_dummy.cu'),
-                            cuda_args : [cuda.nvcc_arch_flags('12.3', 'Common')] + ['--expt-relaxed-constexpr'], 
+                            cuda_args : [cuda.nvcc_arch_flags('12.3', 'Common')] + ['--expt-relaxed-constexpr', '--std=c++20'],
                             install: false,
                             dependencies: cuda_dep)
 
@@ -28,6 +28,6 @@ py_installation.extension_module('cudascii',
     link_language : 'cpp',
         override_options: [
             'cpp_rtti=true',
-            'cython_version=3',
+            'cython_version=3'        
         ]
 )
