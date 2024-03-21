@@ -48,17 +48,4 @@ namespace cudascii {
         out = gray_level_lookup[gray_index];
 
     }
-
-    // Non linear scaling to adjust for gamma exposure
-    else
-        c_srgb = ABOVE_THRESHOLD_SCALAR * powf(c_linear, ABOVE_THRESHOLD_EXPONENT)
-                 + ABOVE_THRESHOLD_OFFSET;
-
-    // Scale c_srgb to the gray levels while handling an edge case of c_srgb = 1
-    gray_index = static_cast<int>(std::fmin(c_srgb * gray_levels, gray_levels - 1.));
-
-    // Final character representing the gray level of the RGB pixel
-    out = gray_level_lookup[gray_index];
 }
-
-}  // namespace cudascii
