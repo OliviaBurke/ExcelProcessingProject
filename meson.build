@@ -69,7 +69,7 @@ dep_list += boost_dep
 
 # python dependency handler
 pymod = import('python')
-py_installation = pymod.find_installation('python3.11') # /usr/include/python3.11/Python.h
+py_installation = pymod.find_installation('python3') # /usr/include/python3.11/Python.h
 py_dep = py_installation.dependency()
 dep_list += py_dep
 
