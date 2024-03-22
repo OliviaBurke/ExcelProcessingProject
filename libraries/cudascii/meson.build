@@ -8,7 +8,7 @@ lib_static_cuda_cudascii = static_library('cudascii_cuda',
                             files('cudascii_dummy.cu'),
                             cuda_args : [cuda.nvcc_arch_flags('12.3', 'Common')] + ['--expt-relaxed-constexpr', '--std=c++20'],
                             install: false,
-                            dependencies: cuda_dep)
+                            dependencies: [cuda_dep, libcudart_dep])
 
 lib_static_cuda_cudascii_dep = declare_dependency(link_with: lib_static_cuda_cudascii,
                                                   include_directories: cudascii_include)
@@ -25,9 +25,10 @@ lib_cudascii_dep_list = [
 py_installation.extension_module('cudascii',
     sources : cudascii_source, 
     dependencies : lib_cudascii_dep_list,
+    install: true,
     link_language : 'cpp',
-        override_options: [
-            'cpp_rtti=true',
-            'cython_version=3'        
-        ]
+    override_options: [
+        'cpp_rtti=true',
+        'cython_version=3'        
+    ]
 )

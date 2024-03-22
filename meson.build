@@ -76,6 +76,17 @@ dep_list += py_dep
 # CUDA
 cuda_dep = dependency('cuda', version : '>=12', modules : ['cudart', 'nvrtc', 'culibos', 'cublas', 'curand'], native: true, static: true)
 
+cpp = meson.get_compiler('cpp')
+
+# needed for the Python extension_module (which is basically a shared_module)
+# https://mesonbuild.com/Python-module.html#extension_module
+libcudart_dep = cpp.find_library('libcudart', 
+                                  dirs: ['/lib64/'], 
+                                  has_headers: ['/usr/local/cuda-12.3/targets/x86_64-linux/include/cudart_platform.h'],
+                                  # header_include_directories: include_directories(), 
+                                  required: true, 
+                                  static: false)
+
 ###############################################################################################
 # wrap dependencies
 # requires a 'meson wrap install <name of library>' before the below scripting will work
