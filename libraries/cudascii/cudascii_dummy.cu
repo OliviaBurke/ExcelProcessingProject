@@ -46,4 +46,13 @@ namespace cudascii {
         // Final character representing the gray level of the RGB pixel
         out[i] = gray_level_lookup[gray_index];
     }
+
+
+    __global__ void set_high(unsigned char *out) {
+
+        // Thread index
+        int i = threadIdx.x + blockIdx.x * blockDim.x;
+        out[i] = 255;
+
+    }
 }
