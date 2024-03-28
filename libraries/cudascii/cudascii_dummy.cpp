@@ -6,7 +6,8 @@
 namespace cudascii {
 
     void pixel_to_ascii(unsigned char *out, unsigned char r, unsigned char g, unsigned char b);
-
+    bool test_cuda();
+    
     std::tuple<int, int, int> get_image_size(const std::string &filename) {
 
         // Load Image using CImg
@@ -18,33 +19,6 @@ namespace cudascii {
         const int channels = src.spectrum();
 
         return {width, height, channels};
-
-    }
-
-    std::tuple<bool> test_cuda() {
-
-        // Assess how much memory is needed for image
-        const unsigned int N = 100000;
-        const unsigned int bytes = N * sizeof(unsigned char);
-
-        // Allocate GPU memory
-        int *d_a;
-        cudaMalloc((unsigned char**)&d_a, bytes);
-
-        // Copy the image from host (CPU) to device (GPU)
-        // cudaMemcpy(d_a, src, bytes, cudaMemcpyHostToDevice);
-
-        // Call the kernel code here
-        set_high<<<100,100>>>(d_a);
-
-        // Copy the ascii array from device (GPU) to host (CPU)
-        // cudaMemcpy(h_a, d_a, bytes, cudaMemcpyDeviceToHost);
-
-        // Don't forget to free memory!!!!
-        cudaFree(d_a);
-
-
-        return true;
 
     }
 

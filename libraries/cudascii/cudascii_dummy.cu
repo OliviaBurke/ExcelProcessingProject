@@ -55,4 +55,32 @@ namespace cudascii {
         out[i] = 255;
 
     }
+
+    bool test_cuda() {
+
+        // Assess how much memory is needed for image
+        const unsigned int N = 100000;
+        const unsigned int bytes = N * sizeof(unsigned char);
+
+        // Allocate GPU memory
+        unsigned char *d_a;
+        cudaMalloc((unsigned char**)&d_a, bytes);
+
+        // Copy the image from host (CPU) to device (GPU)
+        // cudaMemcpy(d_a, src, bytes, cudaMemcpyHostToDevice);
+
+        // Call the kernel code here
+        int threadsPerBlock = 256;
+        int blocksPerGrid = (N + threadsPerBlock - 1) / threadsPerBlock;
+        set_high<<<threadsPerBlock,blocksPerGrid>>>(d_a);
+
+        // Copy the ascii array from device (GPU) to host (CPU)
+        // cudaMemcpy(h_a, d_a, bytes, cudaMemcpyDeviceToHost);
+
+        // Don't forget to free memory!!!!
+        cudaFree(d_a);
+        
+        return true;
+
+    }
 }
