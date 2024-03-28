@@ -25,7 +25,6 @@ lib_cudascii_dep_list = [
 py_installation.extension_module('cudascii',
     sources : cudascii_source, 
     dependencies : lib_cudascii_dep_list,
-    install: true,
     link_language : 'cpp',
     override_options: [
         'cpp_rtti=true',
