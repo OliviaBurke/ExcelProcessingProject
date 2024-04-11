@@ -1,7 +1,10 @@
 #include <cuda_runtime.h>
 
+#include <chrono>
 #include <cmath>
+#include <iostream>
 #include <string>
+#include <thread>
 
 namespace {
     // Algorithm Parameterization
@@ -59,12 +62,16 @@ namespace cudascii {
     bool test_cuda() {
 
         // Assess how much memory is needed for image
-        const unsigned int N = 100000;
+        const unsigned int N = 1'000'000'000;
         const unsigned int bytes = N * sizeof(unsigned char);
 
         // Allocate GPU memory
         unsigned char *d_a;
-        cudaMalloc((unsigned char**)&d_a, bytes);
+        if(cudaMalloc((unsigned char**)&d_a, bytes) != cudaSuccess)
+        {
+            std::cout << "failed!" << std::endl;
+            return false;
+        }
 
         // Copy the image from host (CPU) to device (GPU)
         // cudaMemcpy(d_a, src, bytes, cudaMemcpyHostToDevice);
@@ -76,6 +83,9 @@ namespace cudascii {
 
         // Copy the ascii array from device (GPU) to host (CPU)
         // cudaMemcpy(h_a, d_a, bytes, cudaMemcpyDeviceToHost);
+
+        using namespace std::chrono_literals;
+        std::this_thread::sleep_for(3s);
 
         // Don't forget to free memory!!!!
         cudaFree(d_a);

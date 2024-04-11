@@ -82,7 +82,7 @@ cpp = meson.get_compiler('cpp')
 # https://mesonbuild.com/Python-module.html#extension_module
 libcudart_dep = cpp.find_library('libcudart', 
                                   dirs: ['/lib64/'], 
-                                  has_headers: ['/usr/local/cuda-12.3/targets/x86_64-linux/include/cudart_platform.h'],
+                                  has_headers: ['/usr/local/cuda-12.4/targets/x86_64-linux/include/cudart_platform.h'],
                                   # header_include_directories: include_directories(), 
                                   required: true, 
                                   static: false)
