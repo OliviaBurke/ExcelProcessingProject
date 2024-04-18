@@ -5,6 +5,7 @@
 #include <iostream>
 #include <string>
 #include <thread>
+#include <cimg_cimg.hpp>
 
 namespace {
     // Algorithm Parameterization
@@ -24,7 +25,7 @@ namespace {
 
 namespace cudascii {
 
-    __global__ void pixel_to_ascii(unsigned char *out, unsigned char r, unsigned char g, unsigned char b) {
+    __global__ void pixel_to_ascii(unsigned char *out, unsigned char *r, unsigned char *g, unsigned char *b) {
 
         // Thread index
         int i = threadIdx.x + blockIdx.x * blockDim.x;
@@ -33,7 +34,7 @@ namespace cudascii {
         int gray_index;
         
         // Standard linear combination
-        c_linear = RED_WEIGHT*(r/255.) + GREEN_WEIGHT*(g/255.) + BLUE_WEIGHT*(b/255.);
+        c_linear = RED_WEIGHT*(r[i]/255.) + GREEN_WEIGHT*(g[i]/255.) + BLUE_WEIGHT*(b[i]/255.);
         
         // If gray level is very dark, use linear scaling
         if (c_linear <= CONVERSION_THRESHOLD)
@@ -48,6 +49,72 @@ namespace cudascii {
 
         // Final character representing the gray level of the RGB pixel
         out[i] = gray_level_lookup[gray_index];
+    }
+
+    std::string image_to_ascii(const std::string &filename) {
+
+        // Load Image using CImg
+        cimg_library::CImg<unsigned char> src(filename.c_str());
+
+        // Declare Host result
+        std::vector<unsigned char> h_out;
+
+        // Get the image dimensions
+        const int width = src.width();
+        const int height = src.height();
+
+        // Assess how much memory is needed for image
+        const unsigned int N = width*height;
+        const unsigned int bytes = N * sizeof(unsigned char);
+
+        // Allocate GPU memory
+        unsigned char *d_out, *d_r, *d_g, *d_b;
+        int cs_out, cs_r, cs_g, cs_b;
+        cs_out = cudaMalloc((unsigned char**)&d_out, bytes);
+        cs_r = cudaMalloc((unsigned char**)&d_r, bytes);
+        cs_g = cudaMalloc((unsigned char**)&d_g, bytes);
+        cs_b = cudaMalloc((unsigned char**)&d_b, bytes);
+        
+        if((cs_out | cs_r | cs_g | cs_b) != cudaSuccess)
+        {
+            std::cout << "failed!" << std::endl;
+            return "";
+        }
+
+        // Copy the image from host (CPU) to device (GPU)
+        cudaMemcpy(d_r, src.channel(0), bytes, cudaMemcpyHostToDevice);
+        cudaMemcpy(d_g, src.channel(1), bytes, cudaMemcpyHostToDevice);
+        cudaMemcpy(d_b, src.channel(2), bytes, cudaMemcpyHostToDevice);
+        
+        // Call the pixel_to_ascii code here
+        int threadsPerBlock = 256;
+        int blocksPerGrid = (N + threadsPerBlock - 1) / threadsPerBlock;
+        pixel_to_ascii<<<threadsPerBlock,blocksPerGrid>>>(d_out, d_r, d_g, d_b);
+
+        // Copy the ascii array from device (GPU) to host (CPU)
+        cudaMemcpy(h_out.data(), d_out, bytes, cudaMemcpyDeviceToHost);
+
+        // Don't forget to free memory!!!!
+        cudaFree(d_out);
+        cudaFree(d_r);
+        cudaFree(d_g);
+        cudaFree(d_b);
+
+        // Build string return value
+        std::string text(height*(width+1)-1, ' ');
+
+        for (int row; row < height; row++) {
+
+            for (int col; col < height; col++)
+                text += h_out[row*width + col];
+
+            if (row != height-1)
+                text += '\n';
+
+        }
+
+        return text;
+
     }
 
 
