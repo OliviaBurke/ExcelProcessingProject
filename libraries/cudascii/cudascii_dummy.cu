@@ -72,6 +72,10 @@ namespace cudascii {
             std::cout << "failed!" << std::endl;
             return false;
         }
+        else
+        {
+            std::cout << "passed!" << std::endl;
+        }
 
         // Copy the image from host (CPU) to device (GPU)
         // cudaMemcpy(d_a, src, bytes, cudaMemcpyHostToDevice);
