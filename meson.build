@@ -1,4 +1,4 @@
-project('securitysystem', 'cpp',
+project('securitysystem', 'cpp', 'c', 'cuda',
   version : '0.1',
   default_options : [
                      #'b_lto_mode=default', 
@@ -8,7 +8,7 @@ project('securitysystem', 'cpp',
                      'cpp_std=c++2a', 
                      'prefer_static=true', 
                      'b_staticpic=true', 
-                     'werror=true'                   
+                     'werror=true'                     
                      ])  
 
 cpp_flags = [ '-Wshadow', 
@@ -69,12 +69,23 @@ dep_list += boost_dep
 
 # python dependency handler
 pymod = import('python')
-py_installation = pymod.find_installation('python3.11') # /usr/include/python3.11/Python.h
+py_installation = pymod.find_installation('python3') # /usr/include/python3.11/Python.h
 py_dep = py_installation.dependency()
 dep_list += py_dep
 
 # CUDA
-cuda_dep = dependency('cuda', version : '>=12', modules : ['cublas'], native: true, static: true)
+cuda_dep = dependency('cuda', version : '>=12', modules : ['cudart', 'nvrtc', 'culibos', 'cublas', 'curand'], native: true, static: true)
+
+cpp = meson.get_compiler('cpp')
+
+# needed for the Python extension_module (which is basically a shared_module)
+# https://mesonbuild.com/Python-module.html#extension_module
+libcudart_dep = cpp.find_library('libcudart', 
+                                  dirs: ['/lib64/'], 
+                                  has_headers: ['/usr/local/cuda-12.4/targets/x86_64-linux/include/cudart_platform.h'],
+                                  # header_include_directories: include_directories(), 
+                                  required: true, 
+                                  static: false)
 
 ###############################################################################################
 # wrap dependencies
@@ -120,6 +131,11 @@ dep_list += libpng_dep
 libjpeg_turbo_proj = subproject('libjpeg-turbo', default_options: ['default_library=static',  'warning_level=0', 'werror=false'])
 libjpeg_turbo_dep = libjpeg_turbo_proj.get_variable('jpeg_dep')
 dep_list += libjpeg_turbo_dep
+
+# zlib
+zlib_proj = subproject('zlib', default_options: ['default_library=static',  'warning_level=0', 'werror=false'])
+zlib_dep = zlib_proj.get_variable('zlib_dep')
+dep_list += zlib_dep
 
 ###############################################################################################
 # now, binary build targets and libraries
