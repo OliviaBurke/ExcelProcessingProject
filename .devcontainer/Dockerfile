@@ -16,8 +16,6 @@ RUN useradd -m $USERNAME \
     && mkdir -p /home/$USERNAME/.vscode-server/extensions \
     && chown -R $USERNAME /home/$USERNAME/.vscode-server || :
 
-# Copy the interactive environment setup scripts in place
-COPY env_setup.sh /etc/profile.d/
 # Add the message of the day instructions for the image
 COPY motd /etc/
 
@@ -32,10 +30,9 @@ RUN SNIPPET="export PROMPT_COMMAND='history -a' && export HISTFILE=/commandhisto
 # Switch to the non-root account.
 USER $USERNAME
 WORKDIR /home/$USERNAME
-RUN echo "alias build="/build.sh"" >> /home/$USERNAME/.bashrc
-RUN echo "cat /etc/motd" >> /home/$USERNAME/.bashrc
 
-# this script should run upon container creation
-COPY ./env_setup.sh /etc/profile.d/
+# Copy the interactive environment setup scripts in place
+COPY env_setup.sh /etc/profile.d/
+COPY .bashrc /home/$USERNAME/.bashrc
 
-CMD ["/bin/bash"]
+CMD ["/bin/bash source /home/$USERNAME/.bashrc"]
