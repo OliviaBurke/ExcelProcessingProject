@@ -31,9 +31,6 @@
         }
     },
     "runArgs": [
-        // enable if NVidia container kit installed
-        // "--gpus",
-        // "all",
         "--network=host",
         "--cap-add=SYS_PTRACE",
         "--security-opt",
@@ -64,5 +61,6 @@
     "workspaceMount": "type=bind,source=${localWorkspaceFolder},target=/build,consistency=consistent",
     "updateRemoteUserUID": false,
     "overrideCommand": true,
-    "containerEnv": { "PATH": "${localEnv:PATH}:/usr/local/cuda-12.4/bin/:/opt/cmake/bin" }
+    // this is taken care of when containers are built 
+    // "containerEnv": { "PATH": "${localEnv:PATH}:/opt/cmake/bin" }
 }
