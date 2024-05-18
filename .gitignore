@@ -64,4 +64,4 @@ debugsan
 coverage
 
 subprojects/packagecache
-subprojects/*/
+!subprojects/*.wrap
