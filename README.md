@@ -50,7 +50,3 @@
 1. [Read](https://mesonbuild.com/Feature-autodetection.html#ccache).
 
 2. Install [ccache](https://ccache.dev/) within a dev container or on a host where the code will be built
-
-## CUDA
-
-The build container copies libraries and headers from a prebuilt CUDA container.
