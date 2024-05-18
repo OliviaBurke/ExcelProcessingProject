@@ -115,21 +115,6 @@ pybind11_proj = subproject('pybind11', default_options: ['default_library=static
 pybind11_dep = pybind11_proj.get_variable('pybind11_dep')
 dep_list += pybind11_dep
 
-# libpng
-libpng_proj = subproject('libpng', default_options: ['default_library=static',  'warning_level=0', 'werror=false'])
-libpng_dep = libpng_proj.get_variable('libpng_dep')
-dep_list += libpng_dep
-
-# libjpeg
-libjpeg_turbo_proj = subproject('libjpeg-turbo', default_options: ['default_library=static',  'warning_level=0', 'werror=false'])
-libjpeg_turbo_dep = libjpeg_turbo_proj.get_variable('jpeg_dep')
-dep_list += libjpeg_turbo_dep
-
-# zlib
-zlib_proj = subproject('zlib', default_options: ['default_library=static',  'warning_level=0', 'werror=false'])
-zlib_dep = zlib_proj.get_variable('zlib_dep')
-dep_list += zlib_dep
-
 ###############################################################################################
 # now, binary build targets and libraries
 
