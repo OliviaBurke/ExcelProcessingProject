@@ -115,6 +115,11 @@ pybind11_proj = subproject('pybind11', default_options: ['default_library=static
 pybind11_dep = pybind11_proj.get_variable('pybind11_dep')
 dep_list += pybind11_dep
 
+# pistache
+# pistache_proj = subproject('pistache', default_options: ['default_library=static',  'warning_level=0', 'werror=false'])
+pistache_dep = dependency('libpistache') # = pistache_proj.get_variable('pistache_dep')
+dep_list += pistache_dep
+
 ###############################################################################################
 # now, binary build targets and libraries
 
