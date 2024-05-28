@@ -1,10 +1,13 @@
-#include <restapi_server.hpp>
-
-
-// #include <pistache/endpoint.h>
-// #include <pistache/http.h>
+#include <httplib_httplib.hpp>
 
 int main([[maybe_unused]] int argc, [[maybe_unused]] char **argv)
 {
-    Pistache::Http::listenAndServe<restapi::Server>(Pistache::Address("*:9080"));
+    // HTTP
+    httplib::Server svr;
+
+    svr.Get("/hi", [](const httplib::Request &, httplib::Response &res) {
+    res.set_content("Hello World!", "text/plain");
+    });
+
+    svr.listen("0.0.0.0", 8080);
 }
