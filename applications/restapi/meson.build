@@ -10,5 +10,5 @@ executable('restapi',
            'restapi.m.cpp', 
            cpp_args : cpp_flags,
         #    link_with : restapi_static_library,
-           dependencies: [lib_static_httplib_dep],
+           dependencies: [lib_static_httplib_dep, spdlog_dep],
            install: true)

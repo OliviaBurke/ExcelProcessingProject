@@ -110,12 +110,12 @@ spdlog_proj = subproject('spdlog', default_options: ['default_library=static',  
 spdlog_dep = spdlog_proj.get_variable('spdlog_dep')
 dep_list += spdlog_dep
 
-# pybind11
+# pybind11 (header only)
 pybind11_proj = subproject('pybind11', default_options: ['default_library=static',  'warning_level=0', 'werror=false'])
 pybind11_dep = pybind11_proj.get_variable('pybind11_dep')
 dep_list += pybind11_dep
 
-# cpp-httplib
+# cpp-httplib (header only)
 cpp_httplib_proj = subproject('cpp-httplib', default_options: ['default_library=static',  'warning_level=0', 'werror=false'])
 cpp_httplib_dep = cpp_httplib_proj.get_variable('cpp_httplib_dep')
 dep_list += cpp_httplib_dep
